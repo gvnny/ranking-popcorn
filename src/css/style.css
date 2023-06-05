@@ -1,0 +1,111 @@
+/*
+    Cores:
+        Fundo - #171717
+        Verde claro - #92DB8C
+        Verder escuro - #232923
+
+*/
+
+
+html, body {
+    padding: 0;
+    margin: 0; 
+}
+
+body {
+    background-color: #171717;
+    font-family: 'Aldrich', sans-serif;
+    font-family: 'Monoton', cursive;
+    font-family: 'Press Start 2P', cursive;
+    font-family: 'Silkscreen', cursive;
+}
+
+.areaLogo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.areaLogo .logo {
+    width: 300px;
+    height: 150px;
+}
+
+.areaLogo .logo .topLogo {
+    display: flex;
+}
+
+.areaLogo .logo .topLogo .lines {
+    justify-content: center;
+    align-items: center;
+    display: grid;
+    height: 7px;
+    margin-top: 13px;
+    margin-left: 4px;
+}
+
+.areaLogo .logo .topLogo .line {
+    height: 1px;
+    width: 232px;
+}
+
+.areaLogo .topLogo h4 {
+    margin: 0;
+    color: #92DB8C;
+    font-size: 20px;
+    margin-left: 2px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px #232923;
+}
+
+hr {
+    border: none;
+    border-top: 1.5px solid #92DB8C;
+    justify-content: center;
+    align-items: center;
+    display: grid;
+    margin: 2px;
+    margin-left: 0;
+}
+
+.areaLogo .logo .midLogo h1 {
+    margin: 0;
+    color:#92DB8C;
+    line-height: 1;
+    text-transform: uppercase;
+    text-shadow: 3px 3px #232923;
+    font-size: 52px;
+}
+
+.areaLogo .logo .botLogo .lines {
+    margin-top: 7px;
+    width: 170px;
+    margin-left: 3px;
+}
+
+button {
+    border-radius: 0%;
+    text-align: center;
+    background-color: #92DB8C;
+    border: none;
+    font-family: 'Silkscreen', cursive;
+    box-shadow: 3px 3px #232923;
+    text-shadow: 1px 0px #232923;
+    cursor: pointer;
+    width: 75px;
+    height: 24px;
+    font-size: 17px;
+}
+
+.containerButton {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    height: 119px
+}
+
+.containerButton .divBottunPlay {
+    margin-top: 120px;
+}
+
