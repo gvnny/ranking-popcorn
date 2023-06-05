@@ -20,7 +20,31 @@ body {
     font-family: 'Silkscreen', cursive;
 }
 
-.areaLogo {
+button {
+    border-radius: 0%;
+    text-align: center;
+    background-color: #92DB8C;
+    border: none;
+    font-family: 'Silkscreen', cursive;
+    box-shadow: 3px 3px #232923;
+    text-shadow: 1px 0px #232923;
+    cursor: pointer;
+    width: 75px;
+    height: 24px;
+    font-size: 17px;
+}
+
+hr {
+    border: none;
+    border-top: 1.5px solid #92DB8C;
+    justify-content: center;
+    align-items: center;
+    display: grid;
+    margin: 2px;
+    margin-left: 0;
+}
+
+ .areaLogo {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -50,23 +74,13 @@ body {
     width: 232px;
 }
 
-.areaLogo .topLogo h4 {
+.areaLogo .logo .topLogo h4 {
     margin: 0;
     color: #92DB8C;
     font-size: 20px;
     margin-left: 2px;
     text-transform: uppercase;
     text-shadow: 2px 2px #232923;
-}
-
-hr {
-    border: none;
-    border-top: 1.5px solid #92DB8C;
-    justify-content: center;
-    align-items: center;
-    display: grid;
-    margin: 2px;
-    margin-left: 0;
 }
 
 .areaLogo .logo .midLogo h1 {
@@ -84,20 +98,6 @@ hr {
     margin-left: 3px;
 }
 
-button {
-    border-radius: 0%;
-    text-align: center;
-    background-color: #92DB8C;
-    border: none;
-    font-family: 'Silkscreen', cursive;
-    box-shadow: 3px 3px #232923;
-    text-shadow: 1px 0px #232923;
-    cursor: pointer;
-    width: 75px;
-    height: 24px;
-    font-size: 17px;
-}
-
 .containerButton {
     display: grid;
     justify-content: center;
@@ -109,3 +109,11 @@ button {
     margin-top: 120px;
 }
 
+
+.gamePage {
+    display: none;
+}
+
+.homePage {
+    display: block;
+}

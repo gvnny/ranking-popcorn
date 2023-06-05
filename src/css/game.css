@@ -1,0 +1,79 @@
+/*
+    Cores:
+        Fundo - #171717
+        Verde claro - #92DB8C
+        Verder escuro - #232923
+
+*/
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #171717;
+    font-family: 'Aldrich', sans-serif;
+    font-family: 'Monoton', cursive;
+    font-family: 'Press Start 2P', cursive;
+    font-family: 'Silkscreen', cursive;
+}
+
+hr {
+    margin: 0;
+    border-top: 2px solid white;
+}
+
+.wrapper {
+    width: 900px;
+    margin: 0 auto;
+}
+
+.wrapper .tableGame {
+
+}
+
+.wrapper .tableGame .titleTable {
+    height: 100px;
+    background-color: #92DB8C;
+    height: 100px;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    box-shadow: 4px 0px white
+}
+
+.wrapper .tableGame .titleTable h1{
+    font-size: 66px;
+    color: black;
+    margin: 0;
+    text-shadow: 1px 1px white;
+    text-transform: uppercase;
+}
+
+.wrapper .tableGame .fieldsTable {
+
+}
+
+.wrapper .tableGame .fieldsTable .fieldS {
+
+}
+
+.wrapper .tableGame .fieldsTable .fieldS .containerField {
+    display: flex;
+}
+
+.wrapper .tableGame .fieldsTable .fieldS .containerField .s {
+    width: 130px;
+    height: 130px;
+    text-align: center;
+}
+
+.wrapper .tableGame .fieldsTable .fieldS .containerField .s h4 {
+    color: white;
+    font-size: 80px;
+    margin: 0;
+    height: 130px;
+}
+

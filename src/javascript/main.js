@@ -1,3 +1,9 @@
+// Mudança de tela 
+
+const clickBottunPlay = () => {
+    window.location.href = "game.html";
+}
+
 // API
 
 // https://rapidapi.com/SAdrian/api/moviesdatabase
@@ -26,7 +32,4 @@ const requestApi = async () => {
         console.error(error);
     }
 }
-
-
-
 requestApi();
