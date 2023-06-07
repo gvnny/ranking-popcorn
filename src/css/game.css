@@ -60,20 +60,85 @@ hr {
 
 }
 
-.wrapper .tableGame .fieldsTable .fieldS .containerField {
+.wrapper .tableGame .fieldsTable .fieldS .containerField,
+.wrapper .tableGame .fieldsTable .fieldA .containerField,
+.wrapper .tableGame .fieldsTable .fieldB .containerField,
+.wrapper .tableGame .fieldsTable .fieldC .containerField {
     display: flex;
 }
 
-.wrapper .tableGame .fieldsTable .fieldS .containerField .s {
+.wrapper .tableGame .fieldsTable .fieldS .containerField .s,
+.wrapper .tableGame .fieldsTable .fieldA .containerField .a,
+.wrapper .tableGame .fieldsTable .fieldB .containerField .b,
+.wrapper .tableGame .fieldsTable .fieldC .containerField .c {
     width: 130px;
     height: 130px;
     text-align: center;
 }
 
-.wrapper .tableGame .fieldsTable .fieldS .containerField .s h4 {
+.wrapper .tableGame .fieldsTable .fieldS .containerField .s h4, 
+.wrapper .tableGame .fieldsTable .fieldA .containerField .a h4,
+.wrapper .tableGame .fieldsTable .fieldB .containerField .b h4,
+.wrapper .tableGame .fieldsTable .fieldC .containerField .c h4{
     color: white;
     font-size: 80px;
     margin: 0;
     height: 130px;
 }
 
+.wrapper .tableGame .fieldsTable .fieldS .containerField .images, 
+.wrapper .tableGame .fieldsTable .fieldA .containerField .images, 
+.wrapper .tableGame .fieldsTable .fieldB .containerField .images,
+.wrapper .tableGame .fieldsTable .fieldC .containerField .images {
+    display: flex;
+}
+
+.wrapper .tableGame .fieldsTable .fieldS .containerField .images .firstPosition,
+.wrapper .tableGame .fieldsTable .fieldA .containerField .images .secondPosition,
+.wrapper .tableGame .fieldsTable .fieldA .containerField .images .thirdPosition,
+.wrapper .tableGame .fieldsTable .fieldB .containerField .images .fourthPosition,
+.wrapper .tableGame .fieldsTable .fieldB .containerField .images .fifthPosition,
+.wrapper .tableGame .fieldsTable .fieldB .containerField .images .sixthPosition,
+.wrapper .tableGame .fieldsTable .fieldC .containerField .images .seventhPosition,
+.wrapper .tableGame .fieldsTable .fieldC .containerField .images .eighthPosition,
+.wrapper .tableGame .fieldsTable .fieldC .containerField .images .ninthPosition,
+.wrapper .tableGame .fieldsTable .fieldC .containerField .images .tenthPosition{
+    width: 130px;
+    height: 130px;
+    border: 1px solid black;
+    margin-right: 10px;
+}
+
+.wrapper .tableGame .controller {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.wrapper .tableGame .controller .containerController .controllerImage{
+    width: 160px;
+    height: 180px;
+    border: 1px solid black;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.wrapper .tableGame .controller .containerController .controllerBottun{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    border-radius: 0%;
+    text-align: center;
+    background-color: #92DB8C;
+    border: none;
+    font-family: 'Silkscreen', cursive;
+    box-shadow: 3px 3px #232923;
+    text-shadow: 1px 0px #232923;
+    cursor: pointer;
+    width: 75px;
+    height: 24px;
+    font-size: 17px;
+}

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="javascript/main.js"></script>
     <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/easterEgg.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,39 +16,69 @@
 </head>
 <body>
     
-    <div id="homePage active">
-        <div class="areaLogo">
+    <div class="areaLogo">
 
-            <div class="logo">
-                <div class="topLogo">
-                    <h4>the</h4>
-                    <div class="lines"> 
-                        <div class="line"><hr></div>
-                        <div class="line"><hr></div>
-                    </div>
+        <div class="logo">
+            <div class="topLogo">
+                <h4>the</h4>
+                <div class="lines"> 
+                    <div class="line"><hr></div>
+                    <div class="line"><hr></div>
                 </div>
-    
-                <div class="midLogo">
-                    <h1>Ranking Popcorn</h1>
-                </div>
-                
-                <div class="botLogo">
-                    <div class="lines">
-                        <div class="line"><hr></div>
-                        <div class="line"><hr></div>
-                    </div>
-                </div>
-    
             </div>
-    
-        </div>
-    
-        <div class="containerButton">
-            <div class="divBottunPlay">
-                <button class="buttunPlay" onclick="clickBottunPlay()">Play</button>
+
+            <div class="midLogo">
+                <h1>Ranking Popcorn</h1>
             </div>
+            
+            <div class="botLogo">
+                <div class="lines">
+                    <div class="line"><hr></div>
+                    <div class="line"><hr></div>
+                </div>
+            </div>
+
         </div>
 
+    </div>
+
+    <div class="cointainerButton">
+        <div class="divButtonPlay">
+            <button class="buttonPlay" onclick="clickBottunPlay()">Play</button>
+        </div>
+
+        <div class="divButtonhowToPlay">
+            <button class="buttonHowToPlay" onclick="clickBottunHowToPlay('#howToPlay')">How to Play?</button>
+        </div>
+    </div>
+
+
+    <div class="modalHowToPlay" id="howToPlay">
+        <button id="closeModal" onclick="closeModal('#howToPlay')">x</button>
+        <h1 >How to Play?</h1>
+        <p>Welcome to our movie ranking game! Get ready to put your critic skills into action and create your own personal movie ranking. Here's a guide on how to play:<br>
+            <br>
+            Step 1: Get to know the rating categories
+            In our game, you have four rating categories: S, A, B, and C. Each category has a different number of movies you can assign to it. S is the most special category, where you can choose only one movie to stand out. Category A allows you to pick two movies. Next, in category B, you can select up to three movies. Lastly, in category C, you have space for four movies. In total, you will classify 10 movies.<br>
+            <br>
+            Step 2: Start ranking the movies
+            You will be presented with one movie image at a time, without knowing the next one. Your task is to drag the movie image to the desired ranking. At the beginning, all movies will be outside the ranking, and you can freely drag them around.<br>
+            <br>
+            Step 3: Proceed to the next movie
+            After placing the current movie in its position, simply click the "Next" button, and another movie will be shown for ranking. Remember, once you move to the next movie, you won't be able to change the ranking of previous movies.<br>
+            <br>
+            Have fun and perfect your ranking!Enjoy exploring and ranking the movies! Challenge yourself to create the perfect ranking and discover which movies will be crowned as the best in your list. Let your cinematic journey begin!</p>
+    </div>
+
+    <!-- Reference: https://github.com/WilliamDosSantos/T-Rex-Game-Com-JavaScript -->
+
+    <div class="easterEgg">
+
+        <span class="score"></span>
+        <div class="skeleton"></div>
+        <div class="cacto"></div>
+
+        <script src="javascript/easterEgg.js"></script>
     </div>
 
 </body>

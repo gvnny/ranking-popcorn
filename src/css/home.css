@@ -99,21 +99,72 @@ hr {
 }
 
 .containerButton {
-    display: grid;
+
+}
+
+.cointainerButton .divButtonPlay {
     justify-content: center;
     align-items: center;
-    height: 119px
+    display: grid;
 }
 
-.containerButton .divBottunPlay {
+.cointainerButton .divButtonPlay .buttonPlay {
     margin-top: 120px;
+    margin-bottom: 20px;
 }
 
+.cointainerButton .divButtonhowToPlay {
+    justify-content: center;
+    align-items: center;
+    display: grid;
+}
 
-.gamePage {
+.cointainerButton .divButtonhowToPlay .buttonHowToPlay {
+    width: 160px;
+}
+
+.modalHowToPlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: #000000a1;
     display: none;
+    justify-content: center;
+    align-items: center;
 }
 
-.homePage {
-    display: block;
+.modalHowToPlay #closeModal {
+
+}
+
+.modalHowToPlay h1,
+.modalHowToPlay p{
+    color: white;
+}
+
+.modalHowToPlay #closeModal {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    font-size: 20px;
+    border: none;
+    background: none;
+    color: #FFF;
+    font-family: 'Silkscreen', cursive;
+    padding: 10px;
+    cursor: pointer;
+    box-shadow: none;
+}
+
+.modalHowToPlay h1 {
+    text-align: center;
+    margin: 50px;
+}
+
+.modalHowToPlay p {
+    text-align: justify;
+    margin-right: 150px;
+    margin-left: 150px;
 }
