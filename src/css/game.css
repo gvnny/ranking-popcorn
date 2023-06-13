@@ -121,6 +121,7 @@ hr {
     border: 1px solid black;
     margin-top: 10px;
     margin-bottom: 10px;
+    position: relative;
 }
 
 .wrapper .tableGame .controller .containerController .controllerBottun{
@@ -142,3 +143,28 @@ button {
     height: 24px;
     font-size: 17px;
 }
+
+.img {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.controller  .containerController .controllerImage .controllerImageSubtitle{
+    
+    background: rgb(138, 160, 143);
+    width: 300px;
+    height: 28px;
+    position: absolute;
+    display: none;
+}
+
+.dragging {
+    opacity: 0.5;
+    cursor: move;
+}
+
+.highlight {
+    background-color: red;
+}
+
