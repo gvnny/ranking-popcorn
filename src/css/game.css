@@ -121,10 +121,10 @@ hr {
     border: 1px solid black;
     margin-top: 10px;
     margin-bottom: 10px;
-    position: relative;
+    /* position: relative; */
 }
 
-.wrapper .tableGame .controller .containerController .controllerBottun{
+.wrapper .tableGame .controller .containerController .controllerButton{
     display: grid;
     justify-content: center;
     align-items: center;
@@ -152,11 +152,21 @@ button {
 
 .controller  .containerController .controllerImage .controllerImageSubtitle{
     
-    background: rgb(138, 160, 143);
-    width: 300px;
-    height: 28px;
+    background: #232923;
+    max-width: 300px;
     position: absolute;
     display: none;
+    margin-left: 175px;
+    border-radius: 4px;
+    box-shadow: 2px 2px white;
+    padding: 5px;
+}
+
+.title {
+    margin-top: 5px;
+    text-align: center;
+    font-size: 15px;
+    color: white;
 }
 
 .dragging {
@@ -168,3 +178,6 @@ button {
     background-color: red;
 }
 
+.over {
+    background-color: green;
+}

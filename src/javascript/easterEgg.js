@@ -1,7 +1,7 @@
 // Reference: https://github.com/WilliamDosSantos/T-Rex-Game-Com-JavaScript
 
-const dino = document.querySelector(".dino");
-const cacto = document.querySelector(".cacto");
+const skeleton = document.querySelector(".skeleton");
+const tree = document.querySelector(".tree");
 const score = document.querySelector(".score");
 let alreadyJump = false;
 let count = 0;
@@ -13,26 +13,26 @@ document.addEventListener("keydown", (e) => {
 });
 
 function jump() {
-  if (!dino.classList.contains("jump")) {
-    dino.classList.add("jump");
+  if (!skeleton.classList.contains("jump")) {
+    skeleton.classList.add("jump");
     alreadyJump = true;
 
     setTimeout(() => {
-      dino.classList.remove("jump");
+      skeleton.classList.remove("jump");
       alreadyJump = false;
     }, 1100);
   }
 }
 
 setInterval(() => {
-  let dinoBottom = parseInt(
-    window.getComputedStyle(dino).getPropertyValue("bottom")
+  let skeletonBottom = parseInt(
+    window.getComputedStyle(skeleton).getPropertyValue("bottom")
   );
-  let cactoLeft = parseInt(
-    window.getComputedStyle(cacto).getPropertyValue("left")
+  let treeLeft = parseInt(
+    window.getComputedStyle(tree).getPropertyValue("left")
   );
 
-  if (cactoLeft > 40 && cactoLeft < 270 && dinoBottom <= 50 && !alreadyJump) {
+  if (treeLeft > 40 && treeLeft < 270 && skeletonBottom <= 50 && !alreadyJump) {
     alert(`Game Over! Seu score foi: ${count}`);
     count = 0;
   }

@@ -1,3 +1,126 @@
+window.onload = function() {
+    // Acoes da interface
+    
+    document.querySelector('.controllerButton').onclick = function() {
+        document.dispatchEvent(new CustomEvent('handler.nextMovie', {}));
+    }
+
+    document.querySelector('#images').addEventListener("mouseover", function() {
+        document.dispatchEvent(new CustomEvent('handler.setImageSubtitleVisible', {}));
+    });
+
+     document.querySelector('#images').addEventListener("mouseout", function () {
+        document.dispatchEvent(new CustomEvent('handler.setImageSubtitleInvisible', {}));
+    });
+
+    // Logica
+
+    document.addEventListener('handler.nextMovie', async function() {
+        const movie = await getMovie();
+        document.dispatchEvent(new CustomEvent('state.setMovie', {'detail': movie}));
+    });
+
+    document.addEventListener('handler.setImageSubtitleVisible', async function() {
+        document.dispatchEvent(new CustomEvent('state.setImageSubtitleVisible', {}));
+    });
+
+    document.addEventListener('handler.setImageSubtitleInvisible', async function() {
+        document.dispatchEvent(new CustomEvent('state.setImageSubtitleInvisible', {}));
+    });
+
+    // State
+
+    const __state = {};
+
+    document.addEventListener('state.setMovie', function(event) {
+        __state['movie'] = event.detail;
+        document.dispatchEvent(new CustomEvent('state.onMovieChange', {'detail': __state['movie']}));
+    });
+
+    document.addEventListener('state.setImageSubtitleVisible', function(event) {
+        __state['imageSubtitleVisibility'] = true;
+        document.dispatchEvent(new CustomEvent('state.onImageSubtitleVisible', {}));
+    });
+
+    document.addEventListener('state.setImageSubtitleInvisible', function(event) {
+        __state['imageSubtitleVisibility'] = false;
+        document.dispatchEvent(new CustomEvent('state.onImageSubtitleInvisible', {}));
+    });
+
+    // Atualizacoes da interface
+
+    document.addEventListener('state.onMovieChange', function(event) {
+        const movie = event.detail;
+        const controllerImageElement = document.querySelector('#images');
+        const img = document.querySelector("img");       
+        img.src = movie.primaryImage.url;
+        img.classList.add("img");
+    });
+
+    document.addEventListener('state.onMovieChange', function(event) {
+        const movie = event.detail;
+        const title = document.querySelector('#images .controllerImageSubtitle p');
+        title.textContent = movie.originalTitleText.text;
+        title.classList.add("title");
+    });
+
+    document.addEventListener('state.onImageSubtitleVisible', function(event) {     
+        setTimeout(() => {
+            document.querySelector('#images .controllerImageSubtitle').style.display = "block";
+        }, 1000);
+    });
+
+    document.addEventListener('state.onImageSubtitleInvisible', function(event) {  
+        document.querySelector('#images .controllerImageSubtitle').style.display = "none";
+    })
+
+    // Utilitarios
+
+    async function getMovie() {
+        const url = 'https://moviesdatabase.p.rapidapi.com/titles/random?list=most_pop_movies&limit=1';
+        const options = {
+            method: 'GET',
+            headers: {
+                'X-RapidAPI-Key': '4d22f61055msh339bba6dd0edd70p10eb88jsn9d4271618ebc',
+                'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com'
+            }
+        };
+
+        try {
+            const response = await fetch(url, options);
+            const result = await response.json();
+            return result.results[0];       
+
+        } catch (error) {
+            console.error(error);
+            throw(error);
+        }
+    }
+
+    // inicializao
+    
+    document.dispatchEvent(new CustomEvent('handler.nextMovie', {}));
+};
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+
+//////////////////////////////////////////////////////////////
+
+
+
+window.onload = async function() {
 // Abrir o modal How To Play
 
 const clickBottunHowToPlay = (idModal) => {
@@ -22,10 +145,11 @@ const clickBottunPlay = () => {
 
 // https://rapidapi.com/SAdrian/api/moviesdatabase
 
-let position = 0;
-const requestApi = async (position) => {
+let movieTitle;
 
-    const url = 'https://moviesdatabase.p.rapidapi.com/titles/random?list=most_pop_movies';
+const requestApi = async () => {
+
+    const url = 'https://moviesdatabase.p.rapidapi.com/titles/random?list=most_pop_movies&limit=1';
     const options = {
         method: 'GET',
         headers: {
@@ -42,8 +166,10 @@ const requestApi = async (position) => {
         const controllerImageElement = document.querySelector('#images');
         const img = document.createElement("img");
         const subtitle = document.createElement("div");
-        img.src = result.results[position].primaryImage.url;
+        img.src = result.results[0].primaryImage.url;
         
+        movieTitle = result.results[0].originalTitleText.text;
+
         img.classList.add("img");
         controllerImageElement.appendChild(img);
         
@@ -60,51 +186,35 @@ const requestApi = async (position) => {
 
 const mouseOverMouseOut = () => {
 
-    const subtitle = document.querySelector("#subtitle");
-    subtitle.addEventListener("mouseover", function() {
-        this.style.display = "inline-block";
+    const images = document.querySelector("#images");
+    images.addEventListener("mouseover", function() {
+
+       setTimeout(() => {
+            this.querySelector('.controllerImageSubtitle').style.display = "inline-block";
+       }, 1000);
     });
+
+    const title = document.createElement("p");
+    title.textContent = `"${movieTitle}"`;
+    title.classList.add("title");
+    const createLocal = document.querySelector(".controllerImageSubtitle");
+    createLocal.appendChild(title);
         
-    subtitle.addEventListener("mouseout", function () {
-        this.style.display = "none";
+    images.addEventListener("mouseout", function () {
+        this.querySelector('.controllerImageSubtitle').style.display = "none";
     });
 }
-
-// // const handleImageMouseEnter = (event) => {
-// //     const image = event.target;
-// //     const subtitle = image.querySelector(".controllerImageSubtitle");
-// //     subtitle.style.display = "inline-block";
-// // }
-
-// // Método para adicionar eventos
-
-// const addImageEvents = () => {
-//     const images = document.querySelectorAll("#images");
-//     images.forEach((image) => {
-//         image.addEventListener("mouseenter", handleImageMouseEnter);
-//         image.addEventListener("mouseleave", handleImageMouseLeave);
-//     })
-// }
-
-// // desaparecer a legenda com o nome do filme ao retirar o mouse de cima da imagem
-
-// const handleImageMouseLeave = (event) => {
-//     const image = event.target;
-//     const subtitle = image.querySelector(".controllerImageSubtitle");
-//     subtitle.style.display = "none";
-// }
-
 
 // Troca de imagens usando o botão Next
 
 const clickBottunNext = () => {
 
-    if(position > 10) {
-        return console.log("Salvar");
-    } else {
-        position =+ 1;
-    return requestApi(position);
-    }
+    // if(position > 10) {
+    //     return console.log("Salvar");
+    // } else {
+    //     position =+ 1;
+    // return requestApi(position);
+    // }
 }
 
 
@@ -120,19 +230,7 @@ const dragAndDrop = () => {
     console.log("DRAGIMAGE"+dragImage);
     console.log("DROPIMAGE"+dropImage);
 
-    dragImage.forEach (drag => {
-        drag.addEventListener("dragstart", dragstart);
-        drag.addEventListener("drag", dragging);
-        drag.addEventListener("dragend", dragend);
-    })
-
-    dropImage.forEach(drop => {
-        drop.addEventListener("dragenter", dragenter);
-        drop.addEventListener("dragover", dragover);
-        drop.addEventListener("dragleave", dragleave);
-        drop.addEventListener("dragdrop", dragdrop);
-    })
-    
+   
     
     // const controller = document.querySelector(".containerController");
 
@@ -148,8 +246,9 @@ const dragAndDrop = () => {
 
     // )
 
-    const dragstart = () => {
-        dragImage.classList.add("dragging");
+    const dragstart = function() {
+        //dragImage.forEach(drag => drag.classList.add("dragging"));
+        this.classList.add("dragging");
         dropImage.forEach(drop => drop.classList.add("highlight"));
     }
     
@@ -157,8 +256,9 @@ const dragAndDrop = () => {
     
     }
     
-    const dragend = () => {
-        dragImage.classList.remove("dragging");
+    const dragend = function() {
+        //dragImage.forEach(drag => drag.classList.remove("dragging"));
+        this.classList.remove("dragging");
         dropImage.forEach(drop => drop.classList.remove("highlight"));
     }
     
@@ -167,26 +267,50 @@ const dragAndDrop = () => {
     
     }
     
-    const dragover = () => {
-    
+    const dragover = function () {
+        this.classList.add("over");
+
+        const cardBeingDragged = document.querySelector(".dragging");
+        dropImage.appendChild(cardBeingDragged);
     }
     
-    const dragleave = () => {
-        
+    const dragleave = function () {
+        this.classList.remove("over");
     }
     
-    const dragdrop = () => {
-    
+    const dragdrop = function() {
+        this.classList.remove("over");
     }
 
-} 
+    dragImage.forEach (drag => {
+        drag.addEventListener("dragstart", dragstart);
+        drag.addEventListener("drag", dragging);
+        drag.addEventListener("dragend", dragend);
+    })
 
+    dropImage.forEach(drop => {
+        drop.addEventListener("dragenter", dragenter);
+        drop.addEventListener("dragover", dragover);
+        drop.addEventListener("dragleave", dragleave);
+        drop.addEventListener("dragdrop", dragdrop);
+    })
 
-
+}
 
 // Chamada de métodos
 
-requestApi(0);
+await requestApi();
 mouseOverMouseOut();
 dragAndDrop();
 // addImageEvents();
+
+
+
+// setTimeout(function() { }, 2000);
+
+};
+
+
+
+
+*/
