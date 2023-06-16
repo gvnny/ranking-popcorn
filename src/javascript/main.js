@@ -1,106 +1,123 @@
-window.onload = function() {
-    // Acoes da interface
+// window.onload = function() {
+
+//     // Acoes da interface
     
-    document.querySelector('.controllerButton').onclick = function() {
-        document.dispatchEvent(new CustomEvent('handler.nextMovie', {}));
-    }
+//     document.querySelector('.controllerButton').onclick = function() {
+//         document.dispatchEvent(new CustomEvent('handler.nextMovie', {}));
+//     }
 
-    document.querySelector('#images').addEventListener("mouseover", function() {
-        document.dispatchEvent(new CustomEvent('handler.setImageSubtitleVisible', {}));
-    });
+//     document.querySelector('#images').addEventListener("mouseover", function() {
+//         document.dispatchEvent(new CustomEvent('handler.setImageSubtitleVisible', {}));
+//     });
 
-     document.querySelector('#images').addEventListener("mouseout", function () {
-        document.dispatchEvent(new CustomEvent('handler.setImageSubtitleInvisible', {}));
-    });
+//      document.querySelector('#images').addEventListener("mouseout", function () {
+//         document.dispatchEvent(new CustomEvent('handler.setImageSubtitleInvisible', {}));
+//     });
 
-    // Logica
+//     document.querySelector('#images').addEventListener("dragstart", function () {
+//         document.dispatchEvent(new CustomEvent('handler.drag', {}));
+//     });
 
-    document.addEventListener('handler.nextMovie', async function() {
-        const movie = await getMovie();
-        document.dispatchEvent(new CustomEvent('state.setMovie', {'detail': movie}));
-    });
+//     document.querySelector('#images').addEventListener("drag", function () {
+//         document.dispatchEvent(new CustomEvent('handler.dragging', {}));
+//     });
 
-    document.addEventListener('handler.setImageSubtitleVisible', async function() {
-        document.dispatchEvent(new CustomEvent('state.setImageSubtitleVisible', {}));
-    });
+//     document.querySelector('#images').addEventListener("dragenter", function () {
+//         document.dispatchEvent(new CustomEvent('handler.enteringDestinationArea', {}));
+//     });
 
-    document.addEventListener('handler.setImageSubtitleInvisible', async function() {
-        document.dispatchEvent(new CustomEvent('state.setImageSubtitleInvisible', {}));
-    });
+//     // Logica
 
-    // State
+//     document.addEventListener('handler.nextMovie', async function() {
+//         const movie = await getMovie();
+//         document.dispatchEvent(new CustomEvent('state.setMovie', {'detail': movie}));
+//     });
 
-    const __state = {};
+//     document.addEventListener('handler.setImageSubtitleVisible', function() {
+//         document.dispatchEvent(new CustomEvent('state.setImageSubtitleVisible', {}));
+//     });
 
-    document.addEventListener('state.setMovie', function(event) {
-        __state['movie'] = event.detail;
-        document.dispatchEvent(new CustomEvent('state.onMovieChange', {'detail': __state['movie']}));
-    });
+//     document.addEventListener('handler.setImageSubtitleInvisible', function() {
+//         document.dispatchEvent(new CustomEvent('state.setImageSubtitleInvisible', {}));
+//     });
 
-    document.addEventListener('state.setImageSubtitleVisible', function(event) {
-        __state['imageSubtitleVisibility'] = true;
-        document.dispatchEvent(new CustomEvent('state.onImageSubtitleVisible', {}));
-    });
+//     document.addEventListener('handler.drag', function () {
+//         document.dispatchEvent(new CustomEvent('state.drag', {}));
+//     });
 
-    document.addEventListener('state.setImageSubtitleInvisible', function(event) {
-        __state['imageSubtitleVisibility'] = false;
-        document.dispatchEvent(new CustomEvent('state.onImageSubtitleInvisible', {}));
-    });
+//     // State
 
-    // Atualizacoes da interface
+//     const __state = {};
 
-    document.addEventListener('state.onMovieChange', function(event) {
-        const movie = event.detail;
-        const controllerImageElement = document.querySelector('#images');
-        const img = document.querySelector("img");       
-        img.src = movie.primaryImage.url;
-        img.classList.add("img");
-    });
+//     document.addEventListener('state.setMovie', function(event) {
+//         __state['movie'] = event.detail;
+//         document.dispatchEvent(new CustomEvent('state.onMovieChange', {'detail': __state['movie']}));
+//     });
 
-    document.addEventListener('state.onMovieChange', function(event) {
-        const movie = event.detail;
-        const title = document.querySelector('#images .controllerImageSubtitle p');
-        title.textContent = movie.originalTitleText.text;
-        title.classList.add("title");
-    });
+//     document.addEventListener('state.setImageSubtitleVisible', function(event) {
+//         __state['imageSubtitleVisibility'] = true;
+//         document.dispatchEvent(new CustomEvent('state.onImageSubtitleVisible', {}));
+//     });
 
-    document.addEventListener('state.onImageSubtitleVisible', function(event) {     
-        setTimeout(() => {
-            document.querySelector('#images .controllerImageSubtitle').style.display = "block";
-        }, 1000);
-    });
+//     document.addEventListener('state.setImageSubtitleInvisible', function(event) {
+//         __state['imageSubtitleVisibility'] = false;
+//         document.dispatchEvent(new CustomEvent('state.onImageSubtitleInvisible', {}));
+//     });
 
-    document.addEventListener('state.onImageSubtitleInvisible', function(event) {  
-        document.querySelector('#images .controllerImageSubtitle').style.display = "none";
-    })
+//     // Atualizacoes da interface
 
-    // Utilitarios
+//     document.addEventListener('state.onMovieChange', function(event) {
+//         const movie = event.detail;
+//         const controllerImageElement = document.querySelector('#images');
+//         const img = document.querySelector("img");       
+//         img.src = movie.primaryImage.url;
+//         img.classList.add("img");
+//     });
 
-    async function getMovie() {
-        const url = 'https://moviesdatabase.p.rapidapi.com/titles/random?list=most_pop_movies&limit=1';
-        const options = {
-            method: 'GET',
-            headers: {
-                'X-RapidAPI-Key': '4d22f61055msh339bba6dd0edd70p10eb88jsn9d4271618ebc',
-                'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com'
-            }
-        };
+//     document.addEventListener('state.onMovieChange', function(event) {
+//         const movie = event.detail;
+//         const title = document.querySelector('#images .controllerImageSubtitle p');
+//         title.textContent = movie.originalTitleText.text;
+//         title.classList.add("title");
+//     });
 
-        try {
-            const response = await fetch(url, options);
-            const result = await response.json();
-            return result.results[0];       
+//     document.addEventListener('state.onImageSubtitleVisible', function(event) {     
+//         setTimeout(() => {
+//             document.querySelector('#images .controllerImageSubtitle').style.display = "block";
+//         }, 1000);
+//     });
 
-        } catch (error) {
-            console.error(error);
-            throw(error);
-        }
-    }
+//     document.addEventListener('state.onImageSubtitleInvisible', function(event) {  
+//         document.querySelector('#images .controllerImageSubtitle').style.display = "none";
+//     })
 
-    // inicializao
+//     // Utilitarios
+
+//     async function getMovie() {
+//         const url = 'https://moviesdatabase.p.rapidapi.com/titles/random?list=most_pop_movies&limit=1';
+//         const options = {
+//             method: 'GET',
+//             headers: {
+//                 'X-RapidAPI-Key': '4d22f61055msh339bba6dd0edd70p10eb88jsn9d4271618ebc',
+//                 'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com'
+//             }
+//         };
+
+//         try {
+//             const response = await fetch(url, options);
+//             const result = await response.json();
+//             return result.results[0];       
+
+//         } catch (error) {
+//             console.error(error);
+//             throw(error);
+//         }
+//     }
+
+//     // inicializao
     
-    document.dispatchEvent(new CustomEvent('handler.nextMovie', {}));
-};
+//     document.dispatchEvent(new CustomEvent('handler.nextMovie', {}));
+// };
 
 
 
@@ -113,7 +130,6 @@ window.onload = function() {
 
 
 
-/*
 
 
 //////////////////////////////////////////////////////////////
@@ -224,78 +240,64 @@ const clickBottunNext = () => {
 
 const dragAndDrop = () => {
 
-    const dragImage = document.querySelectorAll(".controllerImage");
-    const dropImage = document.querySelectorAll(".images");
+    const dragImage = document.querySelector(".controllerImage");
+    const dropZone = document.querySelectorAll(".tierPosition");
 
     console.log("DRAGIMAGE"+dragImage);
-    console.log("DROPIMAGE"+dropImage);
-
-   
-    
-    // const controller = document.querySelector(".containerController");
-
-    // document.addEventListener("dragstart", (e) => {
-    //     e.target.classList.add("dragging");
-    // });
-
-    // document.addEventListener("dragend", (e) => {
-    //     e.target.classList.remove("dragging");
-    // });
-
-    // controller.forEach(("")
-
-    // )
+    console.log("DROPIMAGE"+dropZone);
 
     const dragstart = function() {
-        //dragImage.forEach(drag => drag.classList.add("dragging"));
+        dragImage.classList.add("dragging");
         this.classList.add("dragging");
-        dropImage.forEach(drop => drop.classList.add("highlight"));
+        dropZone.forEach(drop => drop.classList.add("highlight"));
     }
     
     const dragging = () => {
-    
+        
     }
     
     const dragend = function() {
-        //dragImage.forEach(drag => drag.classList.remove("dragging"));
+        dragImage.remove("dragging");
         this.classList.remove("dragging");
-        dropImage.forEach(drop => drop.classList.remove("highlight"));
+        dropZone.forEach(drop => drop.classList.remove("highlight"));
     }
     
     
     const dragenter = () => {
+        
     
     }
     
     const dragover = function () {
         this.classList.add("over");
-
         const cardBeingDragged = document.querySelector(".dragging");
-        dropImage.appendChild(cardBeingDragged);
+        this.appendChild(cardBeingDragged);
     }
     
     const dragleave = function () {
         this.classList.remove("over");
     }
     
-    const dragdrop = function() {
-        this.classList.remove("over");
+    const dropped = function() {
+        //this.classList.remove("over");
+        console.log("Largou");
     }
 
-    dragImage.forEach (drag => {
-        drag.addEventListener("dragstart", dragstart);
-        drag.addEventListener("drag", dragging);
-        drag.addEventListener("dragend", dragend);
-    })
 
-    dropImage.forEach(drop => {
+    dragImage.addEventListener("dragstart", dragstart);
+    dragImage.addEventListener("drag", dragging);
+    dragImage.addEventListener("dragend", dragend);
+
+
+    dropZone.forEach(drop => {
         drop.addEventListener("dragenter", dragenter);
         drop.addEventListener("dragover", dragover);
         drop.addEventListener("dragleave", dragleave);
-        drop.addEventListener("dragdrop", dragdrop);
+        drop.addEventListener("drop", dropped);
     })
 
 }
+
 
 // Chamada de métodos
 
@@ -309,8 +311,3 @@ dragAndDrop();
 // setTimeout(function() { }, 2000);
 
 };
-
-
-
-
-*/
