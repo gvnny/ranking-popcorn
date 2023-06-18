@@ -119,43 +119,9 @@
 //     document.dispatchEvent(new CustomEvent('handler.nextMovie', {}));
 // };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 //////////////////////////////////////////////////////////////
 
-
-
 window.onload = async function() {
-// Abrir o modal How To Play
-
-const clickBottunHowToPlay = (idModal) => {
-    const divModal = document.querySelector(idModal)
-    divModal.style.display = "inline";
-}
-
-// Fechar o modal How To Play
-
-const closeModal = (idModal) => {
-    const divModal = document.querySelector(idModal)
-    divModal.style.display = "none";
-}
-
-// Mudança de tela 
-
-const clickBottunPlay = () => {
-    window.location.href = "game.html";
-}
 
 // API
 
@@ -164,6 +130,9 @@ const clickBottunPlay = () => {
 let movieTitle;
 
 const requestApi = async () => {
+    const img = document.querySelector('.containerController img');
+    img.draggable = false;
+    img.src ="images/loading.gif";
 
     const url = 'https://moviesdatabase.p.rapidapi.com/titles/random?list=most_pop_movies&limit=1';
     const options = {
@@ -177,21 +146,20 @@ const requestApi = async () => {
     try {
         const response = await fetch(url, options);
         const result = await response.json();
-        console.log(result);
+        
+        if(result.results[0].primaryImage == null) {
+            await requestApi();
+            return;
+        }
 
-        const controllerImageElement = document.querySelector('#images');
-        const img = document.createElement("img");
-        const subtitle = document.createElement("div");
         img.src = result.results[0].primaryImage.url;
-        
         movieTitle = result.results[0].originalTitleText.text;
-
         img.classList.add("img");
-        controllerImageElement.appendChild(img);
-        
-        // const img = document.createElement("img");
-        // img.src = result.results[0].primaryImage.url;
-        // document.body.appendChild(img);
+
+        const subtitle = document.querySelector(".title");
+        subtitle.innerHTML = result.results[0].titleText.text;
+
+        img.draggable = true;
 
     } catch (error) {
         console.error(error);
@@ -201,21 +169,12 @@ const requestApi = async () => {
 // mostrar e desaparecer uma legenda com o nome do filme ao repousar o mouse em cima da imagem
 
 const mouseOverMouseOut = () => {
-
     const images = document.querySelector("#images");
     images.addEventListener("mouseover", function() {
-
        setTimeout(() => {
             this.querySelector('.controllerImageSubtitle').style.display = "inline-block";
        }, 1000);
     });
-
-    const title = document.createElement("p");
-    title.textContent = `"${movieTitle}"`;
-    title.classList.add("title");
-    const createLocal = document.querySelector(".controllerImageSubtitle");
-    createLocal.appendChild(title);
-        
     images.addEventListener("mouseout", function () {
         this.querySelector('.controllerImageSubtitle').style.display = "none";
     });
@@ -233,61 +192,60 @@ const clickBottunNext = () => {
     // }
 }
 
-
 // Drag and Drop 
 
 // Reference: https://www.youtube.com/watch?v=6wn8hpUcEcM
 
 const dragAndDrop = () => {
 
-    const dragImage = document.querySelector(".controllerImage");
+    let dragImage = document.querySelector(".controllerImage img");
     const dropZone = document.querySelectorAll(".tierPosition");
+    let dragged;
 
     console.log("DRAGIMAGE"+dragImage);
     console.log("DROPIMAGE"+dropZone);
 
-    const dragstart = function() {
-        dragImage.classList.add("dragging");
+    const dragstart = function(e) {
         this.classList.add("dragging");
         dropZone.forEach(drop => drop.classList.add("highlight"));
-    }
-    
-    const dragging = () => {
-        
+        dragged = this;
     }
     
     const dragend = function() {
-        dragImage.remove("dragging");
         this.classList.remove("dragging");
         dropZone.forEach(drop => drop.classList.remove("highlight"));
+        dragged = null;
     }
     
-    
-    const dragenter = () => {
-        
-    
-    }
-    
-    const dragover = function () {
+    const dragenter = function(e) {
+        if (!dragged) return;
         this.classList.add("over");
-        const cardBeingDragged = document.querySelector(".dragging");
-        this.appendChild(cardBeingDragged);
+    }
+    
+    const dragover = function (e) {
+        if (!dragged) return;
+        e.preventDefault();
     }
     
     const dragleave = function () {
+        if (!dragged) return;
         this.classList.remove("over");
     }
     
-    const dropped = function() {
-        //this.classList.remove("over");
-        console.log("Largou");
+    const dropped = function(e) {
+        if (!dragged) return;
+        if (this.querySelectorAll('img').length > 0) return;
+        this.classList.remove("over");
+        const newCard = document.createElement("img");
+        newCard.src = dragged.src;
+        this.appendChild(newCard);
+        dragged = null;
+        dropZone.forEach(drop => drop.classList.remove("highlight"));
+        requestApi();
     }
 
-
     dragImage.addEventListener("dragstart", dragstart);
-    dragImage.addEventListener("drag", dragging);
     dragImage.addEventListener("dragend", dragend);
-
 
     dropZone.forEach(drop => {
         drop.addEventListener("dragenter", dragenter);
@@ -295,9 +253,9 @@ const dragAndDrop = () => {
         drop.addEventListener("dragleave", dragleave);
         drop.addEventListener("drop", dropped);
     })
-
 }
 
+document.querySelector(".buttonNext").onclick = requestApi;
 
 // Chamada de métodos
 
@@ -305,9 +263,5 @@ await requestApi();
 mouseOverMouseOut();
 dragAndDrop();
 // addImageEvents();
-
-
-
-// setTimeout(function() { }, 2000);
 
 };
