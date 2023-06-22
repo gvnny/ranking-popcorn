@@ -151,11 +151,11 @@ button {
 }
 
 .highlight {
-    background-color: red;
+    background-color: #1f1d1da1;
 }
 
 .over {
-    background-color: green;
+    background-color: #232923a1;
 }
 
 .tierPosition img {

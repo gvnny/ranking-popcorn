@@ -1,0 +1,164 @@
+/*
+    Cores:
+        Fundo - #171717
+        Verde claro - #92DB8C
+        Verder escuro - #232923
+
+*/
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #171717;
+    font-family: 'Aldrich', sans-serif;
+    font-family: 'Monoton', cursive;
+    font-family: 'Press Start 2P', cursive;
+    font-family: 'Silkscreen', cursive;
+}
+
+hr {
+    margin: 0;
+    border-top: 2px solid white;
+}
+
+.wrapper {
+    width: 900px;
+    margin: 0 auto;
+}
+
+.wrapper .tableGame .titleTable {
+    height: 100px;
+    background-color: #92DB8C;
+    height: 100px;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    box-shadow: 4px 0px white
+}
+
+.wrapper .tableGame .titleTable h1{
+    font-size: 66px;
+    color: black;
+    margin: 0;
+    text-shadow: 1px 1px white;
+    text-transform: uppercase;
+}
+
+
+.wrapper .tableGame .fieldsTable .field .containerField {
+    display: flex;
+}
+
+
+.wrapper .tableGame .fieldsTable .field .containerField .text {
+    width: 130px;
+    height: 130px;
+    text-align: center;
+}
+
+
+.wrapper .tableGame .fieldsTable .field .containerField .text h4{
+    color: white;
+    font-size: 80px;
+    margin: 0;
+    height: 130px;
+}
+
+
+.wrapper .tableGame .fieldsTable .field .containerField {
+    display: flex;
+}
+
+.wrapper .tableGame .fieldsTable .field .containerField .images{
+    display: flex;
+}
+
+
+.wrapper .tableGame .fieldsTable .field .containerField .tierPosition{
+    width: 130px;
+    height: 130px;
+    border: 1px solid black;
+    margin-right: 10px;
+}
+
+.wrapper .tableGame .controller {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.wrapper .tableGame .controller .containerController .controllerImage {
+    width: 160px;
+    height: 180px;
+    border: 1px solid black;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    /* position: relative; */
+}
+
+.wrapper .tableGame .controller .containerController .controllerButton{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    border-radius: 0%;
+    text-align: center;
+    background-color: #92DB8C;
+    border: none;
+    font-family: 'Silkscreen', cursive;
+    box-shadow: 3px 3px #232923;
+    text-shadow: 1px 0px #232923;
+    cursor: pointer;
+    width: 75px;
+    height: 24px;
+    font-size: 17px;
+}
+
+.img {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.controller  .containerController .controllerImage .controllerImageSubtitle{
+    
+    background: #232923;
+    max-width: 300px;
+    position: absolute;
+    display: none;
+    margin-left: 175px;
+    border-radius: 4px;
+    box-shadow: 2px 2px white;
+    padding: 5px;
+}
+
+.title {
+    margin-top: 5px;
+    text-align: center;
+    font-size: 15px;
+    color: white;
+}
+
+.dragging {
+    opacity: 0.5;
+    cursor: move;
+}
+
+.highlight {
+    background-color: #1f1d1da1;
+}
+
+.over {
+    background-color: #232923a1;
+}
+
+.tierPosition img {
+    width: 100%;
+    height: 100%;
+}

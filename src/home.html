@@ -44,7 +44,7 @@
 
     <div class="cointainerButton">
         <div class="divButtonPlay">
-            <button class="buttonPlay" onclick="clickBottunPlay()">Play</button>
+            <button class="buttonPlay" onclick='clickBottunPlay(".modalOptionGame")'>Play</button>
         </div>
 
         <div class="divButtonhowToPlay">
@@ -56,18 +56,29 @@
     <div class="modalHowToPlay" id="howToPlay">
         <button id="closeModal" onclick="closeModal('#howToPlay')">x</button>
         <h1 >How to Play?</h1>
-        <p>Welcome to our movie ranking game! Get ready to put your critic skills into action and create your own personal movie ranking. Here's a guide on how to play:<br>
+        <p>Welcome to our movie/serie ranking game! Get ready to put your critic skills into action and create your own personal movie/serie ranking. Here's a guide on how to play:<br>
             <br>
             Step 1: Get to know the rating categories
-            In our game, you have four rating categories: S, A, B, and C. Each category has a different number of movies you can assign to it. S is the most special category, where you can choose only one movie to stand out. Category A allows you to pick two movies. Next, in category B, you can select up to three movies. Lastly, in category C, you have space for four movies. In total, you will classify 10 movies.<br>
+            In our game, you have four rating categories: S, A, B, and C. Each category has a different number of movies/serie you can assign to it. S is the most special category, where you can choose only one movie/serie to stand out. Category A allows you to pick two movies/serie. Next, in category B, you can select up to three movies/serie. Lastly, in category C, you have space for four movies/series. In total, you will classify 10 movies.<br>
             <br>
-            Step 2: Start ranking the movies
-            You will be presented with one movie image at a time, without knowing the next one. Your task is to drag the movie image to the desired ranking. At the beginning, all movies will be outside the ranking, and you can freely drag them around.<br>
+            Step 2: Start ranking the movies/series
+            You will be presented with one movie image at a time, without knowing the next one. Your task is to drag the movie image to the desired ranking. At the beginning, all movies/series will be outside the ranking, and you can freely drag them around.<br>
             <br>
             Step 3: Proceed to the next movie
-            After placing the current movie in its position, simply click the "Next" button, and another movie will be shown for ranking. Remember, once you move to the next movie, you won't be able to change the ranking of previous movies.<br>
+            After placing the current movie in its position, simply click the "Next" button, and another movie will be shown for ranking. Remember, once you move to the next movie, you won't be able to change the ranking of previous movies/series.<br>
             <br>
-            Have fun and perfect your ranking!Enjoy exploring and ranking the movies! Challenge yourself to create the perfect ranking and discover which movies will be crowned as the best in your list. Let your cinematic journey begin!</p>
+            Have fun and perfect your ranking!Enjoy exploring and ranking the movies/series! Challenge yourself to create the perfect ranking and discover which movies/series will be crowned as the best in your list. Let your cinematic journey begin!</p>
+    </div>
+    <div class="containerModalOptionGame">
+        <div class="modalOptionGame">
+            <button id="closeModalOptionGame" onclick="closeModal('.modalOptionGame')">x</button>
+            <h1 >What will rank today?</h1>
+            <div class="openMode">
+                <button  id="openMovie" onclick="clickBottunHowOpenMovie()">Movie</button>
+                <button  id="openSerie" onclick="clickBottunHowOpenSerie()">Serie</button>
+            </div>
+            
+        </div>
     </div>
 
     <!-- Reference: https://github.com/WilliamDosSantos/T-Rex-Game-Com-JavaScript -->

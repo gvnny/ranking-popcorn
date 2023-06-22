@@ -168,3 +168,64 @@ hr {
     margin-right: 150px;
     margin-left: 150px;
 }
+
+.easterEgg {
+    display: none;
+}
+
+.containerModalOptionGame {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.containerModalOptionGame .modalOptionGame {
+    position: absolute;
+    width: 350px;
+    height: 300px;
+    font-family: 'Silkscreen', cursive;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: #000000a1;
+    overflow: hidden;
+    display: none;
+    margin-left: 1105px;
+    margin-top: 89px;
+    border-radius: 5px;
+}
+.containerModalOptionGame .modalOptionGame .openMode {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: 'Silkscreen', cursive;
+}
+
+.containerModalOptionGame .modalOptionGame .openMode #openMovie{
+    margin-right: 10px;
+}
+    
+
+.containerModalOptionGame .modalOptionGame h1 {
+    font-size: 20px;
+    color: white;
+    font-family: 'Silkscreen', cursive;
+    text-align: center;
+    margin-top: 35px;
+}
+
+.containerModalOptionGame .modalOptionGame #closeModalOptionGame {
+    position: absolute;
+    top: -9px;
+    right: -23px;
+    font-size: 20px;
+    border: none;
+    background: none;
+    color: #FFF;
+    font-family: 'Silkscreen', cursive;
+    padding: 10px;
+    cursor: pointer;
+    box-shadow: none;
+}

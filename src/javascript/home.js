@@ -14,6 +14,19 @@ const closeModal = (idModal) => {
 
 // Mudança de tela 
 
-const clickBottunPlay = () => {
-    window.location.href = "game.html";
+const clickBottunPlay = (idModal) => {
+    const divModal = document.querySelector(idModal)
+    divModal.style.display = "inline-grid";
+}
+
+// Abrir tela de filmes
+
+const clickBottunHowOpenMovie = () => {
+    window.location.href = "gameMovie.html";
+}
+
+// Abrir tela de séries
+
+const clickBottunHowOpenSerie = () => {
+    window.location.href = "gameSerie.html";
 }
