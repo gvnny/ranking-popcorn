@@ -175,3 +175,69 @@ button {
 
     margin: 50px;
 }
+
+.tableGame .modalSave {
+    position: absolute;
+    width: 350px;
+    height: 300px;
+    font-family: 'Silkscreen', cursive;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: #000000a1;
+    overflow: hidden;
+    margin-left: 1100px;
+    margin-top: 516px;
+    border-radius: 5px;
+    display: none;
+}
+
+.tableGame .modalSave .containerFormSave {
+    margin: 20px;
+}
+
+input {
+    color: white;
+    width: 210px;
+    margin-bottom: 15px;
+    margin-top: 30px;
+    background-color: #232923;
+    border-radius: 4px;
+    font-family: 'Silkscreen', cursive;
+}
+
+label {
+    font-family: 'Silkscreen', cursive;
+    color: white;
+}
+
+
+#closeModalSave {
+    position: absolute;
+    top: -8px;
+    right: -16px;
+    font-size: 20px;
+    border: none;
+    background: none;
+    color: #FFF;
+    font-family: 'Silkscreen', cursive;
+    padding: 10px;
+    cursor: pointer;
+    box-shadow: none;
+}
+
+.tableGame .modalSave .containerFormSave .containerModalButtonSave {
+    justify-items: center;
+    align-items: center;
+    display: grid;
+    margin-top: 50px;
+}
+
+
+.tableGame .modalSave .containerFormSave .containerModalButtonSave .modalButtonSave {
+    width: 90px;
+}
+
+
+

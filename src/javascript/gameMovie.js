@@ -121,6 +121,52 @@
 
 //////////////////////////////////////////////////////////////
 
+// abrir formulário
+
+const clickBottunSave = (idModal) => {
+    const modalSave = document.querySelector(idModal);
+    modalSave.style.display = "block";
+
+    const inputSaveDate = document.getElementById("inputSaveDate");
+    const dateNow = new Date();
+
+    const day = String(dateNow.getDate()).padStart(2, '0');
+    const month = String(dateNow.getMonth() + 1).padStart(2, '0');
+    const year = dateNow.getFullYear();
+
+    inputSaveDate.value = day + '/' + month + '/' + year;
+}
+
+
+const closeModal = (idModal) => {
+    const divModal = document.querySelector(idModal)
+    divModal.style.display = "none";
+}
+
+// salvar
+
+const clickBottunModalSave = () => {
+
+    let nameList = document.getElementById("inputSaveName");
+    nameList = nameList.value;
+
+    let dateList = document.getElementById("inputSaveDate");
+    dateList = dateList.value;
+
+    let objectList = {
+        name: nameList,
+        date: dateList,
+        arrayList: list
+    }
+
+    let arrayListSaves = [];
+    arrayListSaves.fetch(objectList)
+
+    console.log('Objeto: '+objectList);
+    console.log('Array: '+arrayListSaves);
+
+}
+
 window.onload = async function() {
 
 // API
@@ -128,11 +174,8 @@ window.onload = async function() {
 // https://rapidapi.com/SAdrian/api/moviesdatabase
 
 let movieTitle;
-
 let movieUrl;
-
 let obj = {}
-
 let list = [];
 
 const requestApi = async () => {
@@ -189,18 +232,6 @@ const mouseOverMouseOut = () => {
     images.addEventListener("mouseout", function () {
         this.querySelector('.controllerImageSubtitle').style.display = "none";
     });
-}
-
-// Troca de imagens usando o botão Next
-
-const clickBottunNext = () => {
-
-    // if(position > 10) {
-    //     return console.log("Salvar");
-    // } else {
-    //     position =+ 1;
-    // return requestApi(position);
-    // }
 }
 
 // Drag and Drop 
@@ -349,19 +380,12 @@ const endGame = () => {
     }
 
     if (cont == 10) {
-        console.log("Ta cheio");
         const controller = document.querySelector(".controller");
         controller.style.display = "none";
 
         const buttonSave = document.querySelector(".buttonSave");
         buttonSave.style.display = "grid";
     }
-}
-
-// salvar
-
-const clickBottunSave = () => {
-    // Abrir um modal onde você coloca o nome da lista e a data da lista 
 }
 
 // Chamada de métodos
