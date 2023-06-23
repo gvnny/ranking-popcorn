@@ -129,6 +129,12 @@ window.onload = async function() {
 
 let movieTitle;
 
+let movieUrl;
+
+let obj = {}
+
+let list = [];
+
 const requestApi = async () => {
     const img = document.querySelector('.containerController img');
     img.draggable = false;
@@ -152,7 +158,10 @@ const requestApi = async () => {
             return;
         }
 
+        endGame();
+
         img.src = result.results[0].primaryImage.url;
+        movieUrl = result.results[0].primaryImage.url;
         movieTitle = result.results[0].originalTitleText.text;
         img.classList.add("img");
 
@@ -160,6 +169,8 @@ const requestApi = async () => {
         subtitle.innerHTML = result.results[0].titleText.text;
 
         img.draggable = true;
+
+        console.log(list);
 
     } catch (error) {
         console.error(error);
@@ -242,6 +253,13 @@ const dragAndDrop = () => {
         dragged = null;
         dropZone.forEach(drop => drop.classList.remove("highlight"));
         requestApi();
+
+        obj = {
+            name: movieTitle,
+            url: movieUrl
+        }
+
+        list.push(obj);
     }
 
     dragImage.addEventListener("dragstart", dragstart);
@@ -257,11 +275,101 @@ const dragAndDrop = () => {
 
 document.querySelector(".buttonNext").onclick = requestApi;
 
+
+const endGame = () => {
+    let position = document.getElementById("firstPosition");
+    let elements = position.getElementsByTagName("img");
+    let cont = 0;
+
+    if(elements.length == 1) {
+        cont++;
+    }
+
+    position = document.getElementById("secondPosition");
+    elements = position.getElementsByTagName("img");
+
+    if(elements.length == 1) {
+        cont++;
+    }
+
+    position = document.getElementById("thirdPosition");
+    elements = position.getElementsByTagName("img");
+
+    if(elements.length == 1) {
+        cont++;
+    }
+
+    position = document.getElementById("fourthPosition");
+    elements = position.getElementsByTagName("img");
+
+    if(elements.length == 1) {
+        cont++;
+    }
+
+    position = document.getElementById("fifthPosition");
+    elements = position.getElementsByTagName("img");
+
+    if(elements.length == 1) {
+        cont++;
+    }
+
+    position = document.getElementById("sixthPosition");
+    elements = position.getElementsByTagName("img");
+
+    if(elements.length == 1) {
+        cont++;
+    }
+
+    position = document.getElementById("seventhPosition");
+    elements = position.getElementsByTagName("img");
+
+    if(elements.length == 1) {
+        cont++;
+    }
+
+    position = document.getElementById("eighthPosition");
+    elements = position.getElementsByTagName("img");
+
+    if(elements.length == 1) {
+        cont++;
+    }
+
+    position = document.getElementById("ninthPosition");
+    elements = position.getElementsByTagName("img");
+
+    if(elements.length == 1) {
+        cont++;
+    }
+
+    position = document.getElementById("tenthPosition");
+    elements = position.getElementsByTagName("img");
+
+    if(elements.length == 1) {
+        cont++;
+    }
+
+    if (cont == 10) {
+        console.log("Ta cheio");
+        const controller = document.querySelector(".controller");
+        controller.style.display = "none";
+
+        const buttonSave = document.querySelector(".buttonSave");
+        buttonSave.style.display = "grid";
+    }
+}
+
+// salvar
+
+const clickBottunSave = () => {
+    // Abrir um modal onde você coloca o nome da lista e a data da lista 
+}
+
 // Chamada de métodos
 
 await requestApi();
 mouseOverMouseOut();
 dragAndDrop();
+endGame();
 // addImageEvents();
 
 };
