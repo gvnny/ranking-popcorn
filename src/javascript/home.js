@@ -17,28 +17,28 @@ const deleteSave = function(e) {
 
 const changeInfo = function(e) {
 
-    const name = document.getElementById('name');
-    const date = document.getElementById('date');
-    const father = e.parentElement;
-    const oldName = father.querySelector('#name').value;
-    const oldDate = father.querySelector('#date').value;
+    const container = e.parentNode;
+
+    const name = container.querySelector('#name');
+    const date = container.querySelector('#date');
+
+    const oldName = container.querySelector('#name').value;
+    const oldDate = container.querySelector('#date').value;
 
     name.disabled = !name.disabled;
     date.disabled = !date.disabled;
 
-    if (!name.disabled) {
-        name.classList.add('disabledActive');
-    } else {
-        name.classList.remove('disabledActive');
-    }
+    // if (!name.disabled) {
+    //     name.classList.add('disabledActive');
+    // } else {
+    //     name.classList.remove('disabledActive');
+    // }
 
-    if (!date.disabled) {
-        date.classList.add('disabledActive');
-    } else {
-        date.classList.remove('disabledActive');
-    }
-
-    const container = document.querySelector('.save');
+    // if (!date.disabled) {
+    //     date.classList.add('disabledActive');
+    // } else {
+    //     date.classList.remove('disabledActive');
+    // }
 
     if(name.disabled == false && date.disabled == false) {
         const button = document.createElement('button');
@@ -46,20 +46,46 @@ const changeInfo = function(e) {
         button.textContent = 'Save';
         container.appendChild(button);
 
-        button.addEventListener('onclick', function() {
-            const newName = document.getElementById('name').value;
-            const newDate = document.getElementById('date').value;
+        // Atualizar mudanças 
+
+        button.addEventListener('click', function(e) {
+
+            const father = e.target.parentNode;
+
+            const newName = father.querySelector('#name').value;
+            const newDate = father.querySelector('#date').value;
+
+            console.log('Name novo: ', newName);
+            console.log('Date novo: ', newDate);
+
+            console.log('Name antigo: ', oldName);
+            console.log('Date antigo: ', oldDate);
 
             const listSaves = JSON.parse(window.localStorage.getItem('saves'));
 
-            listSaves.newName = listSaves.oldName;
-            delete listSaves.oldName;
+            listSaves[oldName].date = newDate;
 
-            listSaves.oldName.date = newDate
+            listSaves[newName] = listSaves[oldName];
+            delete listSaves[oldName];
 
             window.localStorage.setItem('saves', JSON.stringify(listSaves));
             clickBottunSaves('.cointainerModalSaves');
-        })
+
+
+
+            // const newName = document.getElementById('name').value;
+            // const newDate = document.getElementById('date').value;
+
+            // const listSaves = JSON.parse(window.localStorage.getItem('saves'));
+
+            // listSaves.newName = listSaves.oldName;
+            // delete listSaves.oldName;
+
+            // listSaves.oldName.date = newDate
+
+            // window.localStorage.setItem('saves', JSON.stringify(listSaves));
+            // clickBottunSaves('.cointainerModalSaves');
+        });
 
     } else {
         const button = document.querySelector('.buttonEdit');
