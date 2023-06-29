@@ -152,6 +152,30 @@
                 </div>
 
             </div>
+            <div class="containerButtonSave">
+                <button class="buttonSave" onclick="clickBottunSave('.modalSave')">Salvar</button>
+            </div>
+
+            <div class="modalSave">
+
+                <button id="closeModalSave" onclick="closeModal('.modalSave')">x</button>
+
+                <div class="containerFormSave">
+                    <form class="formSave">
+                        <label for="saveName" id="labelSaveName">Name:</label>
+                        <input type="text" id="inputSaveName" required>
+    
+                        <label for="saveDate" id="labelSaveDate">Date:</label>  
+                        <input type="datetime" id="inputSaveDate" required>
+                    </form>
+
+                    <div class="containerModalButtonSave">
+                        <button class="modalButtonSave" onclick="clickBottunModalSave()">Salvar</button>
+                    </div>
+
+                </div>
+                
+            </div>
 
 
         </div>
