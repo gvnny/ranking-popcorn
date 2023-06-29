@@ -121,6 +121,33 @@
 
 //////////////////////////////////////////////////////////////
 
+
+// [ // lista de saves
+//     { // save
+//         name: "save 1",
+//         date: "2023-06-29T12:34:22",
+//         movies: {
+//             'S': [
+//                 {title: "Dia de Treinamento", img: "sahdashjd.png"}
+//             ],
+//             'A': [
+//                 {title: "Click", img: "sahdashjd.png"},
+//                 {title: "asdasd", img: "sahdashjd.png"}
+//             ],
+//             ...
+//         }
+//     },
+//     {},
+//     ...
+// ]
+
+
+let movieTitle;
+let movieUrl;
+let save = {}; 
+
+let movies = {'S': [], 'A': [], 'B': [], 'C': []}
+
 // abrir formulário
 
 const clickBottunSave = (idModal) => {
@@ -146,25 +173,23 @@ const closeModal = (idModal) => {
 // salvar
 
 const clickBottunModalSave = () => {
+    const name = document.getElementById("inputSaveName").value;
+    const date = document.getElementById("inputSaveDate").value;
+    const saves = JSON.parse(window.localStorage.getItem('saves')) || {};
 
-    let nameList = document.getElementById("inputSaveName");
-    nameList = nameList.value;
+    if (saves[name]) {
+        // FIXME: tratar erro
+        console.error('save com nome', name, 'ja existe');
+    
+    } else {
+        saves[name] = {
+            date: date,
+            movies: movies
+        }
 
-    let dateList = document.getElementById("inputSaveDate");
-    dateList = dateList.value;
-
-    let objectList = {
-        name: nameList,
-        date: dateList,
-        arrayList: list
+        window.localStorage.setItem('saves', JSON.stringify(saves));
+        window.location.href = "home.html";
     }
-
-    let arrayListSaves = [];
-    arrayListSaves.fetch(objectList)
-
-    console.log('Objeto: '+objectList);
-    console.log('Array: '+arrayListSaves);
-
 }
 
 window.onload = async function() {
@@ -172,11 +197,6 @@ window.onload = async function() {
 // API
 
 // https://rapidapi.com/SAdrian/api/moviesdatabase
-
-let movieTitle;
-let movieUrl;
-let obj = {}
-let list = [];
 
 const requestApi = async () => {
     const img = document.querySelector('.containerController img');
@@ -212,8 +232,6 @@ const requestApi = async () => {
         subtitle.innerHTML = result.results[0].titleText.text;
 
         img.draggable = true;
-
-        console.log(list);
 
     } catch (error) {
         console.error(error);
@@ -285,12 +303,16 @@ const dragAndDrop = () => {
         dropZone.forEach(drop => drop.classList.remove("highlight"));
         requestApi();
 
+        let tier = this.parentElement.parentElement.querySelector('h4').innerText
+
         obj = {
             name: movieTitle,
             url: movieUrl
         }
 
-        list.push(obj);
+        movies[tier].push(obj)
+
+        console.log(movies)
     }
 
     dragImage.addEventListener("dragstart", dragstart);
@@ -390,10 +412,10 @@ const endGame = () => {
 
 // Chamada de métodos
 
+
 await requestApi();
 mouseOverMouseOut();
 dragAndDrop();
 endGame();
-// addImageEvents();
 
 };

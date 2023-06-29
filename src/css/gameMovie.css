@@ -187,10 +187,11 @@ button {
     left: 0;
     background: #000000a1;
     overflow: hidden;
-    margin-left: 1100px;
-    margin-top: 516px;
     border-radius: 5px;
     display: none;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .tableGame .modalSave .containerFormSave {
