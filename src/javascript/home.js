@@ -60,7 +60,6 @@ const changeInfo = function(e) {
             container.removeChild(button);
         }
     }
-    
 }
 
 const clickBottunSaves = (idModal) => {
