@@ -1,149 +1,3 @@
-// https://moviesdatabase.p.rapidapi.com/titles/random?list=top_rated_series_250&limit=1
-
-// window.onload = function() {
-
-//     // Acoes da interface
-    
-//     document.querySelector('.controllerButton').onclick = function() {
-//         document.dispatchEvent(new CustomEvent('handler.nextMovie', {}));
-//     }
-
-//     document.querySelector('#images').addEventListener("mouseover", function() {
-//         document.dispatchEvent(new CustomEvent('handler.setImageSubtitleVisible', {}));
-//     });
-
-//      document.querySelector('#images').addEventListener("mouseout", function () {
-//         document.dispatchEvent(new CustomEvent('handler.setImageSubtitleInvisible', {}));
-//     });
-
-//     document.querySelector('#images').addEventListener("dragstart", function () {
-//         document.dispatchEvent(new CustomEvent('handler.drag', {}));
-//     });
-
-//     document.querySelector('#images').addEventListener("drag", function () {
-//         document.dispatchEvent(new CustomEvent('handler.dragging', {}));
-//     });
-
-//     document.querySelector('#images').addEventListener("dragenter", function () {
-//         document.dispatchEvent(new CustomEvent('handler.enteringDestinationArea', {}));
-//     });
-
-//     // Logica
-
-//     document.addEventListener('handler.nextMovie', async function() {
-//         const movie = await getMovie();
-//         document.dispatchEvent(new CustomEvent('state.setMovie', {'detail': movie}));
-//     });
-
-//     document.addEventListener('handler.setImageSubtitleVisible', function() {
-//         document.dispatchEvent(new CustomEvent('state.setImageSubtitleVisible', {}));
-//     });
-
-//     document.addEventListener('handler.setImageSubtitleInvisible', function() {
-//         document.dispatchEvent(new CustomEvent('state.setImageSubtitleInvisible', {}));
-//     });
-
-//     document.addEventListener('handler.drag', function () {
-//         document.dispatchEvent(new CustomEvent('state.drag', {}));
-//     });
-
-//     // State
-
-//     const __state = {};
-
-//     document.addEventListener('state.setMovie', function(event) {
-//         __state['movie'] = event.detail;
-//         document.dispatchEvent(new CustomEvent('state.onMovieChange', {'detail': __state['movie']}));
-//     });
-
-//     document.addEventListener('state.setImageSubtitleVisible', function(event) {
-//         __state['imageSubtitleVisibility'] = true;
-//         document.dispatchEvent(new CustomEvent('state.onImageSubtitleVisible', {}));
-//     });
-
-//     document.addEventListener('state.setImageSubtitleInvisible', function(event) {
-//         __state['imageSubtitleVisibility'] = false;
-//         document.dispatchEvent(new CustomEvent('state.onImageSubtitleInvisible', {}));
-//     });
-
-//     // Atualizacoes da interface
-
-//     document.addEventListener('state.onMovieChange', function(event) {
-//         const movie = event.detail;
-//         const controllerImageElement = document.querySelector('#images');
-//         const img = document.querySelector("img");       
-//         img.src = movie.primaryImage.url;
-//         img.classList.add("img");
-//     });
-
-//     document.addEventListener('state.onMovieChange', function(event) {
-//         const movie = event.detail;
-//         const title = document.querySelector('#images .controllerImageSubtitle p');
-//         title.textContent = movie.originalTitleText.text;
-//         title.classList.add("title");
-//     });
-
-//     document.addEventListener('state.onImageSubtitleVisible', function(event) {     
-//         setTimeout(() => {
-//             document.querySelector('#images .controllerImageSubtitle').style.display = "block";
-//         }, 1000);
-//     });
-
-//     document.addEventListener('state.onImageSubtitleInvisible', function(event) {  
-//         document.querySelector('#images .controllerImageSubtitle').style.display = "none";
-//     })
-
-//     // Utilitarios
-
-//     async function getMovie() {
-//         const url = 'https://moviesdatabase.p.rapidapi.com/titles/random?list=most_pop_movies&limit=1';
-//         const options = {
-//             method: 'GET',
-//             headers: {
-//                 'X-RapidAPI-Key': '4d22f61055msh339bba6dd0edd70p10eb88jsn9d4271618ebc',
-//                 'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com'
-//             }
-//         };
-
-//         try {
-//             const response = await fetch(url, options);
-//             const result = await response.json();
-//             return result.results[0];       
-
-//         } catch (error) {
-//             console.error(error);
-//             throw(error);
-//         }
-//     }
-
-//     // inicializao
-    
-//     document.dispatchEvent(new CustomEvent('handler.nextMovie', {}));
-// };
-
-//////////////////////////////////////////////////////////////
-
-
-// [ // lista de saves
-//     { // save
-//         name: "save 1",
-//         date: "2023-06-29T12:34:22",
-//         movies: {
-//             'S': [
-//                 {title: "Dia de Treinamento", img: "sahdashjd.png"}
-//             ],
-//             'A': [
-//                 {title: "Click", img: "sahdashjd.png"},
-//                 {title: "asdasd", img: "sahdashjd.png"}
-//             ],
-//             ...
-//         }
-//     },
-//     {},
-//     ...
-// ]
-
-
 let movieTitle;
 let movieUrl;
 let save = {}; 
@@ -159,11 +13,7 @@ const clickBottunSave = (idModal) => {
     const inputSaveDate = document.getElementById("inputSaveDate");
     const dateNow = new Date();
 
-    const day = String(dateNow.getDate()).padStart(2, '0');
-    const month = String(dateNow.getMonth() + 1).padStart(2, '0');
-    const year = dateNow.getFullYear();
-
-    inputSaveDate.value = day + '/' + month + '/' + year;
+    inputSaveDate.valueAsDate = new Date();
 }
 
 
@@ -205,7 +55,6 @@ const requestApi = async () => {
     img.draggable = false;
     img.src ="images/loading.gif";
 
-    const url = 'https://moviesdatabase.p.rapidapi.com/titles/random?list=top_rated_series_250&limit=1';
     const options = {
         method: 'GET',
         headers: {
@@ -213,6 +62,16 @@ const requestApi = async () => {
             'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com'
         }
     };
+
+    let url;
+    if (document.location.search == '?type=movies') {
+        url = 'https://moviesdatabase.p.rapidapi.com/titles/random?list=most_pop_movies&limit=1';
+    } else if (document.location.search == '?type=series') {
+        url = 'https://moviesdatabase.p.rapidapi.com/titles/random?list=top_rated_series_250&limit=1';
+    } else {
+        console.error('unknow game type');
+        return;
+    }
 
     try {
         const response = await fetch(url, options);
@@ -264,9 +123,6 @@ const dragAndDrop = () => {
     const dropZone = document.querySelectorAll(".tierPosition");
     let dragged;
 
-    console.log("DRAGIMAGE"+dragImage);
-    console.log("DROPIMAGE"+dropZone);
-
     const dragstart = function(e) {
         this.classList.add("dragging");
         dropZone.forEach(drop => drop.classList.add("highlight"));
@@ -313,8 +169,6 @@ const dragAndDrop = () => {
         }
 
         movies[tier].push(obj)
-
-        console.log(movies)
     }
 
     dragImage.addEventListener("dragstart", dragstart);
