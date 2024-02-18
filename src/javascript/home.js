@@ -3,8 +3,8 @@ const showPreview = function(e) {
 }
 
 const deleteSave = function(e) {
-    const father = e.parentElement;
-    const name = father.querySelector('#name').value;
+    const parent = e.parentElement;
+    const name = parent.querySelector('#name').value;
 
     const listSaves = JSON.parse(window.localStorage.getItem('saves'));
     delete listSaves[name];
@@ -36,10 +36,10 @@ const changeInfo = function(e) {
 
         button.addEventListener('click', function(e) {
 
-            const father = e.target.parentNode;
+            const parent = e.target.parentNode;
 
-            const newName = father.querySelector('#name').value;
-            const newDate = father.querySelector('#date').value;
+            const newName = parent.querySelector('#name').value;
+            const newDate = parent.querySelector('#date').value;
 
             const listSaves = JSON.parse(window.localStorage.getItem('saves'));
 
