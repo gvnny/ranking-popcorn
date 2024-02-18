@@ -9,7 +9,7 @@ const deleteSave = function(e) {
     const listSaves = JSON.parse(window.localStorage.getItem('saves'));
     delete listSaves[name];
     window.localStorage.setItem('saves', JSON.stringify(listSaves));
-    clickBottunSaves('.cointainerModalSaves');
+    clickButtonSaves('.cointainerModalSaves');
 }
 
 const changeInfo = function(e) {
@@ -49,7 +49,7 @@ const changeInfo = function(e) {
             delete listSaves[oldName];
 
             window.localStorage.setItem('saves', JSON.stringify(listSaves));
-            clickBottunSaves('.cointainerModalSaves');
+            clickButtonSaves('.cointainerModalSaves');
 
         });
 
@@ -62,7 +62,7 @@ const changeInfo = function(e) {
     }
 }
 
-const clickBottunSaves = (idModal) => {
+const clickButtonSaves = (idModal) => {
 
     const divModal = document.querySelector(idModal)
     divModal.style.display = "inline";
@@ -96,7 +96,7 @@ const clickBottunSaves = (idModal) => {
 
 // Abrir o modal How To Play
 
-const clickBottunHowToPlay = (idModal) => {
+const clickButtonHowToPlay = (idModal) => {
     const divModal = document.querySelector(idModal)
     divModal.style.display = "inline";
 }
@@ -110,19 +110,19 @@ const closeModal = (idModal) => {
 
 // Mudança de tela 
 
-const clickBottunPlay = (idModal) => {
+const clickButtonPlay = (idModal) => {
     const divModal = document.querySelector(idModal)
     divModal.style.display = "inline-grid";
 }
 
 // Abrir tela de filmes
 
-const clickBottunHowOpenMovie = () => {
+const clickButtonHowOpenMovie = () => {
     window.location.href = "game.html?type=movies";
 }
 
 // Abrir tela de séries
 
-const clickBottunHowOpenSerie = () => {
+const clickButtonHowOpenSerie = () => {
     window.location.href = "game.html?type=series";
 }

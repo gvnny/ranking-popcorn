@@ -6,7 +6,7 @@ let movies = {'S': [], 'A': [], 'B': [], 'C': []}
 
 // abrir formulário
 
-const clickBottunSave = (idModal) => {
+const clickButtonSave = (idModal) => {
     const modalSave = document.querySelector(idModal);
     modalSave.style.display = "block";
 
@@ -24,7 +24,7 @@ const closeModal = (idModal) => {
 
 // salvar
 
-const clickBottunModalSave = () => {
+const clickButtonModalSave = () => {
     const name = document.getElementById("inputSaveName").value;
     const date = document.getElementById("inputSaveDate").value;
     const saves = JSON.parse(window.localStorage.getItem('saves')) || {};
